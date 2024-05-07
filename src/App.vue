@@ -1,0 +1,125 @@
+<template>
+  <div class="Abil">
+    <h1>Abil As Bebrianti</h1>
+    <p>Voli adalah salah satu olahraga yang populer dan menyenangkan. Permainan ini dimainkan oleh dua tim yang berusaha memukul bola ke dalam lapangan lawan menggunakan tangan. Tujuan utama dari voli adalah membuat bola menyentuh tanah lawan sehingga mendapatkan skor. Voli dikenal karena membutuhkan kecepatan, kelincahan, dan kerja sama tim yang baik.</p>
+    <p>Jika Anda menyukai olahraga yang seru dan ingin merasakan kegembiraan bermain voli, jangan ragu untuk bergabung dengan kami dalam turnamen voli yang akan datang!</p>
+    <p>Untuk mendaftar sebagai peserta, silakan isi formulir di bawah ini:</p>
+    <p>Nama:</p>
+    <!-- Input nama -->
+    <input type="text" v-model="nama" :style="{ 'background-color': buttonBackgroundColor }" @blur="updateText('nama')">
+    <p class="input-info">Panjang maksimum teks: 10 karakter </p>
+    <p>Nilai input teks: <span :class="{ 'red-text': isRed }">{{ nama }}</span></p>
+    <p>Alamat:</p>
+    <!-- Input alamat -->
+    <input type="text" v-model="alamat" :style="{ 'background-color': buttonBackgroundColor }" @blur="updateText('alamat')">
+    <p class="input-info">Panjang maksimum teks: 10 karakter </p>
+    <p>Nilai input teks: <span :class="{ 'red-text': isRed }">{{ alamat }}</span></p>
+    <!-- Tambahkan input untuk tanggal lahir  -->
+    <p>Tanggal Lahir:</p>
+    <input type="date" v-model="tanggalLahir">
+   
+    <!-- Tombol untuk mengubah warna latar belakang -->
+    <button :style="{ 'background-color': buttonBackgroundColor }" @click="changeColor">Ubah Warna Latar Belakang Tombol</button>
+    <br>
+    <!-- V-calendar -->
+    <v-calendar v-model="selectedDate" />
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      nama: '',
+      alamat: '',
+      isRed: false,
+      buttonBackgroundColor: '#4CAF50',
+      selectedDate: null,
+      tanggalLahir: '',
+    }
+  },
+  methods: {
+    updateText(field) {
+      if (this[field].length > 10) {
+        this.isRed = true;
+      } else {
+        this.isRed = false;
+      }
+    },
+    changeColor() {
+      this.buttonBackgroundColor = 'green';
+    },
+  }
+}
+</script>
+
+<style>
+/* CSS Styles */
+.Abil {
+  background-color: #4CAF50;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: #333;
+  height: 10%;
+}
+
+p {
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+input[type="text"], input[type="date"], input[type="number"] {
+  width: 20%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  z-index: 2; 
+}
+
+.input-info {
+  font-size: 14px;
+  color: #999;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+span {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+.red-text {
+  color: red;
+}
+
+button {
+  padding: 5px 5px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+</style>
